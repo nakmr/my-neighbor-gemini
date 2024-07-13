@@ -13,8 +13,7 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_APP_ID,
 };
 
-// @ts-ignore TS6133: 'app' is declared but its value is never read.
-const app = initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig) // eslint-disable-line @typescript-eslint/no-unused-vars
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
