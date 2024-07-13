@@ -13,6 +13,7 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_APP_ID,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const app = initializeApp(firebaseConfig)
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
