@@ -1,6 +1,5 @@
-import { fixupConfigRules, fixupPluginRules } from "@eslint/compat";
-import react from "eslint-plugin-react";
-import typescriptEslint from "@typescript-eslint/eslint-plugin";
+import { fixupConfigRules } from "@eslint/compat";
+import reactRefresh from "eslint-plugin-react-refresh";
 import globals from "globals";
 import tsParser from "@typescript-eslint/parser";
 import path from "node:path";
@@ -16,14 +15,15 @@ const compat = new FlatCompat({
     allConfig: js.configs.all
 });
 
-export default [...fixupConfigRules(compat.extends(
+export default [{
+    ignores: ["**/dist", "**/.eslintrc.cjs", "**/build"],
+}, ...fixupConfigRules(compat.extends(
     "eslint:recommended",
-    "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
 )), {
     plugins: {
-        react: fixupPluginRules(react),
-        "@typescript-eslint": fixupPluginRules(typescriptEslint),
+        "react-refresh": reactRefresh,
     },
 
     languageOptions: {
@@ -32,17 +32,13 @@ export default [...fixupConfigRules(compat.extends(
         },
 
         parser: tsParser,
-        ecmaVersion: "latest",
-        sourceType: "module",
-    },
-
-    settings: {
-        react: {
-            version: "detect",
-        },
     },
 
     rules: {
+        "react-refresh/only-export-components": ["warn", {
+            allowConstantExport: true,
+        }],
+
         "react/react-in-jsx-scope": "off",
     },
 }];

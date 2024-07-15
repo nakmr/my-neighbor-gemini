@@ -1,0 +1,16 @@
+@endpoint = http://localhost
+@port = 4000
+@api = api
+
+### gemini/chat
+POST {{endpoint}}:{{port}}/{{api}}/gemini/chat
+Content-Type: application/json
+
+{
+    "message": "問題！！僕の名前はなんでしょうか？？"
+}
+
+### gemini
+POST {{endpoint}}:{{port}}/{{api}}/gemini
+
+
